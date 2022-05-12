@@ -1,0 +1,7 @@
+$$ This is the list of zip codes to forecast from
+$$ One Zip Code, CityName per line separated by a comma
+95492, Windsor
+95448, Healdsburg
+95425, Cloverdale
+
+
