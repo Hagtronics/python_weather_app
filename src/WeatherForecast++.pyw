@@ -9,14 +9,8 @@ https://matplotlib.org/3.1.0/gallery/user_interfaces/embedding_in_tk_sgskip.html
 Totallyt free code, but beware: "Written by an infinite number of Monkeys in an infinite
 amount of time, so this is probably very bad code."
 
-Ver 1.0 - 30April22 - Steve Hageman
+Ver 2.0 - 12May22 - Steve Hageman
 """
-
-# pylint: disable=missing-docstring
-# pylint: disable=line-too-long
-# pylint: disable=consider-using-dict-items
-# pylint: disable=consider-iterating-dictionary
-# pylint: disable=broad-except
 
 import PySimpleGUI as sg
 from urllib.request import urlopen
@@ -35,7 +29,8 @@ matplotlib.use("tkAgg")
 # Config file name
 FORECAST_CONFIG_FILE_NAME = "WeatherForecastZipCodes.txt"
 
-# Keep this secret!
+# You must go to www.weather.com to register for your free usage KEY.
+# Then insert your key here,
 WEATHER_API_KEY = "875 -- insert your key here ---003"
 
 
@@ -96,8 +91,6 @@ def get_the_forecast_locations() -> dict:
 # -----[ Weather API ]---------------------------------------------------------
 
 def get_weather_forecast(zip_code_to_lookup: int) -> dict:
-
-    # tic = time.perf_counter()
     # Sample API Call, complete, for 3 days,
     # https://api.weatherapi.com/v1/forecast.json?key=| Your Key Here |&q=95492&days=3&aqi=no&alerts=no
 
@@ -136,19 +129,13 @@ def get_weather_forecast(zip_code_to_lookup: int) -> dict:
             nested_dict = {}
             for hour in range(0, 24):
                 
-                
-                temp_at_hour = raw_data["forecast"]["forecastday"][day]["hour"][hour][
-                    "temp_f"
-                ]
+                # Parse Hourly Temp Data
+                temp_at_hour = raw_data["forecast"]["forecastday"][day]["hour"][hour]["temp_f"]
                 daily_temp_data.append(temp_at_hour)
                 
-                wind_at_hour = raw_data["forecast"]["forecastday"][day]["hour"][hour][
-                    "wind_mph"
-                ]
+                # Parse Hourly Wind Data
+                wind_at_hour = raw_data["forecast"]["forecastday"][day]["hour"][hour]["wind_mph"]
                 daily_wind_data.append(wind_at_hour)
-
-            # t_dict = {"temp": daily_temp_data}
-            # w_dict = {"wind": daily_wind_data}
                 
             nested_dict['temp'] = daily_temp_data
             nested_dict['wind'] = daily_wind_data
