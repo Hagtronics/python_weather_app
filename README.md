@@ -1,5 +1,5 @@
 # python_weather_app
-A Desktop Weather App Using Python  
+A Desktop Weather App Using Python 3.9   
 What the project does,  
   1) Reads a config file to determine what zip codes to get the weather forecast for. This is so the city's to forecast can be changed withoput having to change the code in any way.
   2) Calls the "https://api.weatherapi.com/v1/forecast.json" data in JSON format and parses out the forecast Temperature and Wind data by hour for 3 days.  
